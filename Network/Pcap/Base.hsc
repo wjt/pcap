@@ -963,6 +963,9 @@ data Link
 #ifdef DLT_PFSYNC
     | DLT_PFSYNC
 #endif
+#ifdef DLT_DBUS
+    | DLT_DBUS                          -- ^ Raw D-Bus messages
+#endif
     deriving (Eq, Ord, Read, Show)
 
 packLink :: Link -> CInt
@@ -1207,6 +1210,9 @@ packLink l = case l of
 #ifdef DLT_IEEE802_15_4
     DLT_IEEE802_15_4 -> #const DLT_IEEE802_15_4
 #endif
+#ifdef DLT_DBUS
+    DLT_DBUS -> #const DLT_DBUS
+#endif
     DLT_UNKNOWN _ -> error "cannot pack unknown link type"
 
 unpackLink :: CInt -> Link
@@ -1450,5 +1456,8 @@ unpackLink l = case l of
 #endif
 #ifdef DLT_IEEE802_15_4
     (#const DLT_IEEE802_15_4) -> DLT_IEEE802_15_4
+#endif
+#ifdef DLT_DBUS
+    (#const DLT_DBUS)-> DLT_DBUS
 #endif
     unk -> DLT_UNKNOWN (fromIntegral unk)
