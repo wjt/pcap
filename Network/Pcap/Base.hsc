@@ -1207,9 +1207,7 @@ packLink l = case l of
 #ifdef DLT_IEEE802_15_4
     DLT_IEEE802_15_4 -> #const DLT_IEEE802_15_4
 #endif
-#ifdef DLT_IEEE802_15_4
     DLT_UNKNOWN _ -> error "cannot pack unknown link type"
-#endif
 
 unpackLink :: CInt -> Link
 unpackLink l = case l of
@@ -1453,6 +1451,4 @@ unpackLink l = case l of
 #ifdef DLT_IEEE802_15_4
     (#const DLT_IEEE802_15_4) -> DLT_IEEE802_15_4
 #endif
-#ifdef DLT_IEEE802_15_4
     unk -> DLT_UNKNOWN (fromIntegral unk)
-#endif
